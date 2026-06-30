@@ -1,0 +1,241 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/*
+ * Material Design 3 tokens — warm peach palette built around #fdeae0.
+ * Primary derived as a deeper terracotta; surfaces are warm off-whites
+ * with subtle peach tint to feel cohesive with the accent.
+ */
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 8px);
+  --radius-md: calc(var(--radius) - 4px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 8px);
+  --radius-2xl: calc(var(--radius) + 16px);
+  --radius-3xl: calc(var(--radius) + 24px);
+  --radius-4xl: calc(var(--radius) + 32px);
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary-container: var(--primary-container);
+  --color-on-primary-container: var(--on-primary-container);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary-container: var(--secondary-container);
+  --color-on-secondary-container: var(--on-secondary-container);
+  --color-tertiary: var(--tertiary);
+  --color-on-tertiary: var(--on-tertiary);
+  --color-tertiary-container: var(--tertiary-container);
+  --color-on-tertiary-container: var(--on-tertiary-container);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-ring-offset-background: var(--background);
+  --color-surface: var(--surface);
+  --color-surface-dim: var(--surface-dim);
+  --color-surface-bright: var(--surface-bright);
+  --color-surface-container-lowest: var(--surface-container-lowest);
+  --color-surface-container-low: var(--surface-container-low);
+  --color-surface-container: var(--surface-container);
+  --color-surface-container-high: var(--surface-container-high);
+  --color-surface-container-highest: var(--surface-container-highest);
+  --color-outline: var(--outline-color);
+  --color-outline-variant: var(--outline-variant);
+  --color-success: var(--success);
+  --color-on-success-container: var(--on-success-container);
+  --color-success-container: var(--success-container);
+  --color-warning: var(--warning);
+  --color-warning-container: var(--warning-container);
+  --color-on-warning-container: var(--on-warning-container);
+  --color-error-container: var(--error-container);
+  --color-on-error-container: var(--on-error-container);
+
+  --font-sans: "Roboto Flex", "Roboto", system-ui, sans-serif;
+  --font-display: "Roboto Flex", "Roboto", system-ui, sans-serif;
+
+  --shadow-elev1: 0 1px 2px 0 color-mix(in oklab, var(--shadow-tint) 18%, transparent),
+    0 1px 3px 1px color-mix(in oklab, var(--shadow-tint) 12%, transparent);
+  --shadow-elev2: 0 1px 2px 0 color-mix(in oklab, var(--shadow-tint) 18%, transparent),
+    0 2px 6px 2px color-mix(in oklab, var(--shadow-tint) 14%, transparent);
+  --shadow-elev3: 0 4px 8px 3px color-mix(in oklab, var(--shadow-tint) 14%, transparent),
+    0 1px 3px 0 color-mix(in oklab, var(--shadow-tint) 22%, transparent);
+}
+
+:root {
+  --radius: 1.25rem;
+
+  --background: oklch(0.985 0.012 55);
+  --foreground: oklch(0.22 0.025 40);
+
+  --surface: oklch(0.985 0.012 55);
+  --surface-dim: oklch(0.92 0.018 55);
+  --surface-bright: oklch(0.99 0.01 55);
+  --surface-container-lowest: oklch(1 0 0);
+  --surface-container-low: oklch(0.975 0.014 55);
+  --surface-container: oklch(0.96 0.018 55);
+  --surface-container-high: oklch(0.94 0.022 55);
+  --surface-container-highest: oklch(0.92 0.026 55);
+
+  --card: oklch(0.96 0.018 55);
+  --card-foreground: oklch(0.22 0.025 40);
+  --popover: oklch(0.975 0.014 55);
+  --popover-foreground: oklch(0.22 0.025 40);
+
+  --primary: oklch(0.58 0.13 38);
+  --primary-foreground: oklch(0.99 0.005 60);
+  --primary-container: oklch(0.93 0.045 55); /* #fdeae0 */
+  --on-primary-container: oklch(0.32 0.09 38);
+
+  --secondary: oklch(0.55 0.06 50);
+  --secondary-foreground: oklch(0.99 0.005 60);
+  --secondary-container: oklch(0.92 0.025 55);
+  --on-secondary-container: oklch(0.28 0.04 45);
+
+  --tertiary: oklch(0.5 0.08 130);
+  --on-tertiary: oklch(0.99 0.005 60);
+  --tertiary-container: oklch(0.9 0.04 130);
+  --on-tertiary-container: oklch(0.26 0.06 130);
+
+  --muted: oklch(0.94 0.018 55);
+  --muted-foreground: oklch(0.5 0.02 45);
+
+  --accent: oklch(0.93 0.045 55);
+  --accent-foreground: oklch(0.32 0.09 38);
+
+  --destructive: oklch(0.55 0.21 27);
+  --destructive-foreground: oklch(0.99 0.005 60);
+  --error-container: oklch(0.92 0.06 25);
+  --on-error-container: oklch(0.35 0.16 27);
+
+  --success: oklch(0.55 0.14 150);
+  --success-container: oklch(0.9 0.06 150);
+  --on-success-container: oklch(0.28 0.1 150);
+
+  --warning: oklch(0.7 0.16 70);
+  --warning-container: oklch(0.92 0.07 75);
+  --on-warning-container: oklch(0.35 0.12 65);
+
+  --border: oklch(0.88 0.02 55);
+  --input: oklch(0.88 0.02 55);
+  --outline-color: oklch(0.62 0.022 50);
+  --outline-variant: oklch(0.86 0.02 55);
+  --ring: oklch(0.58 0.13 38);
+
+  --shadow-tint: oklch(0.3 0.06 40);
+}
+
+.dark {
+  --background: oklch(0.16 0.012 40);
+  --foreground: oklch(0.95 0.012 55);
+
+  --surface: oklch(0.16 0.012 40);
+  --surface-dim: oklch(0.13 0.01 40);
+  --surface-bright: oklch(0.26 0.018 40);
+  --surface-container-lowest: oklch(0.11 0.01 40);
+  --surface-container-low: oklch(0.19 0.014 40);
+  --surface-container: oklch(0.22 0.016 40);
+  --surface-container-high: oklch(0.26 0.018 40);
+  --surface-container-highest: oklch(0.3 0.02 40);
+
+  --card: oklch(0.22 0.016 40);
+  --card-foreground: oklch(0.95 0.012 55);
+  --popover: oklch(0.22 0.016 40);
+  --popover-foreground: oklch(0.95 0.012 55);
+
+  --primary: oklch(0.84 0.08 50);
+  --primary-foreground: oklch(0.2 0.05 40);
+  --primary-container: oklch(0.4 0.09 40);
+  --on-primary-container: oklch(0.95 0.04 55);
+
+  --secondary: oklch(0.82 0.04 55);
+  --secondary-foreground: oklch(0.22 0.03 40);
+  --secondary-container: oklch(0.35 0.035 50);
+  --on-secondary-container: oklch(0.92 0.025 55);
+
+  --tertiary: oklch(0.82 0.06 135);
+  --on-tertiary: oklch(0.2 0.04 130);
+  --tertiary-container: oklch(0.32 0.05 130);
+  --on-tertiary-container: oklch(0.9 0.04 130);
+
+  --muted: oklch(0.26 0.018 40);
+  --muted-foreground: oklch(0.72 0.02 50);
+
+  --accent: oklch(0.4 0.09 40);
+  --accent-foreground: oklch(0.95 0.04 55);
+
+  --destructive: oklch(0.72 0.18 25);
+  --destructive-foreground: oklch(0.15 0.04 25);
+  --error-container: oklch(0.35 0.14 27);
+  --on-error-container: oklch(0.95 0.05 25);
+
+  --success: oklch(0.78 0.14 150);
+  --success-container: oklch(0.3 0.1 150);
+  --on-success-container: oklch(0.92 0.06 150);
+
+  --warning: oklch(0.82 0.15 75);
+  --warning-container: oklch(0.36 0.12 70);
+  --on-warning-container: oklch(0.95 0.06 75);
+
+  --border: oklch(0.34 0.02 40);
+  --input: oklch(0.34 0.02 40);
+  --outline-color: oklch(0.6 0.02 45);
+  --outline-variant: oklch(0.3 0.018 40);
+  --ring: oklch(0.84 0.08 50);
+
+  --shadow-tint: oklch(0 0 0);
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+
+  html, body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+    font-feature-settings: "ss01", "cv11";
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+}
+
+@utility md3-elev-1 {
+  box-shadow: var(--shadow-elev1);
+}
+@utility md3-elev-2 {
+  box-shadow: var(--shadow-elev2);
+}
+@utility md3-elev-3 {
+  box-shadow: var(--shadow-elev3);
+}
+
+@utility md3-state {
+  position: relative;
+  isolation: isolate;
+}
+@utility md3-state-overlay {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: currentColor;
+  opacity: 0;
+  transition: opacity 150ms ease;
+  pointer-events: none;
+}
