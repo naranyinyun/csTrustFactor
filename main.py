@@ -1,11 +1,14 @@
 from fastapi import FastAPI
 import httpx
 from datetime import datetime, UTC
+import os
+
+API_KEY = os.environ.get('API_KEY')
 
 app = FastAPI()
 
 
-async def get_ban(steamid, API_KEY):
+async def get_ban(steamid):
     async with httpx.AsyncClient() as client:
         response = await client.get(
             "https://api.steampowered.com/ISteamUser/GetPlayerBans/v1/",
@@ -31,7 +34,7 @@ async def get_ban(steamid, API_KEY):
     }
 
 
-async def get_time_info(steamid, API_KEY):
+async def get_time_info(steamid):
     async with httpx.AsyncClient() as client:
         response = await client.get(
             "https://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/",
@@ -57,7 +60,7 @@ async def get_time_info(steamid, API_KEY):
     }
 
 
-async def get_cs_playtime(steamid, API_KEY):
+async def get_cs_playtime(steamid):
     async with httpx.AsyncClient() as client:
         response = await client.get(
             "https://api.steampowered.com/IPlayerService/GetOwnedGames/v1/",
@@ -86,8 +89,8 @@ async def get_cs_playtime(steamid, API_KEY):
     }
 
 
-async def calculate_score(steamid, API_KEY):
-    bans = await get_ban(steamid, API_KEY)
+async def calculate_score(steamid):
+    bans = await get_ban(steamid)
 
     if bans is None:
         return {
@@ -96,7 +99,7 @@ async def calculate_score(steamid, API_KEY):
             "reason": "Player Not Found",
         }
 
-    info = await get_time_info(steamid, API_KEY)
+    info = await get_time_info(steamid)
 
     if info is None:
         return {
@@ -105,7 +108,7 @@ async def calculate_score(steamid, API_KEY):
             "reason": "Player Not Found",
         }
 
-    cs_playtime = await get_cs_playtime(steamid, API_KEY)
+    cs_playtime = await get_cs_playtime(steamid)
 
     # 封禁直接 0 分
     if (
@@ -183,5 +186,12 @@ async def calculate_score(steamid, API_KEY):
 
 
 @app.get("/score")
-async def main(steamid: str, API_KEY: str):
-    return await calculate_score(steamid, API_KEY)
+async def main(steamid: str):
+    return await calculate_score(steamid)
+
+@app.get("/")
+async def root():
+    return {
+        "name": "Steam Trust Score API",
+        "version": "1.0",
+    }
