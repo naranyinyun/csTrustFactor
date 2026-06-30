@@ -1,4 +1,5 @@
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 import httpx
 from datetime import datetime, UTC
 import os
@@ -6,6 +7,13 @@ import os
 API_KEY = os.environ.get('API_KEY')
 
 app = FastAPI()
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_methods=["GET"],
+    allow_headers=["*"],
+)
 
 
 async def get_ban(steamid):
