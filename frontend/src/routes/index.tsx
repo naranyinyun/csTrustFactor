@@ -101,7 +101,7 @@ function Index() {
     setLoading(true);
     try {
       const res = await fetch(
-        `https://cs.naranyinyun.work/score?steamid=${encodeURIComponent(id)}`,
+        `https://cs.nalanyinyun.work/score?steamid=${encodeURIComponent(id)}`,
       );
       if (!res.ok) throw new Error(`请求失败 (${res.status})`);
       const json = (await res.json()) as ScoreResponse;
